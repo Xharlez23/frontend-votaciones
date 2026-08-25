@@ -1,0 +1,37 @@
+<div class="contenedor">
+  <mat-card class="tarjeta">
+    <mat-card-header>
+      <mat-card-title>Votaciones SENA</mat-card-title>
+      <mat-card-subtitle>Ingresa tus datos para votar</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form (ngSubmit)="verificar()" class="formulario">
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Cédula</mat-label>
+          <input matInput [(ngModel)]="cedula" name="cedula" type="text" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Nombre completo</mat-label>
+          <input matInput [(ngModel)]="nombre" name="nombre" type="text" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Jornada</mat-label>
+          <mat-select [(ngModel)]="jornada" name="jornada" required>
+            <mat-option value="MANANA">Mañana</mat-option>
+            <mat-option value="TARDE">Tarde</mat-option>
+            <mat-option value="NOCHE">Noche</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="cargando" class="boton">
+          {{ cargando ? 'Verificando...' : 'Continuar' }}
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

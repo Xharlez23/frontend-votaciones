@@ -1,0 +1,46 @@
+<div class="contenedor">
+  <h1>Resultados en vivo</h1>
+
+  <mat-button-toggle-group
+    [value]="jornadaSeleccionada"
+    (change)="cambiarJornada($event.value)"
+    class="selector-jornada">
+    <mat-button-toggle value="MANANA">Mañana</mat-button-toggle>
+    <mat-button-toggle value="TARDE">Tarde</mat-button-toggle>
+    <mat-button-toggle value="NOCHE">Noche</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <div *ngIf="cargando" class="cargando">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+
+  <div *ngIf="!cargando && resultados">
+    <p class="total-votos">Total de votos: {{ resultados.totalVotos }}</p>
+
+    <mat-card
+      *ngFor="let r of resultados.resultados; let i = index"
+      class="tarjeta-resultado"
+      [class.ganador]="i === 0 && r.votos > 0">
+      <mat-card-content>
+        <div class="fila-resultado">
+          <span class="nombre">
+            {{ r.nombre }}
+            <span *ngIf="i === 0 && r.votos > 0" class="corona">🏆</span>
+          </span>
+          <span class="conteo">{{ r.votos }} votos ({{ calcularPorcentaje(r.votos) }}%)</span>
+        </div>
+        <div class="barra-fondo">
+          <div class="barra-progreso" [style.width.%]="calcularPorcentaje(r.votos)"></div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <p *ngIf="resultados.resultados.length === 0" class="sin-datos">
+      No hay candidatos registrados para esta jornada.
+    </p>
+  </div>
+
+  <a routerLink="/" class="volver">Volver al inicio</a>
+</div>

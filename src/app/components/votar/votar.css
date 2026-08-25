@@ -1,0 +1,49 @@
+.contenedor {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.jornada-label {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.cargando {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.grid-candidatos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.tarjeta-candidato {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.tarjeta-candidato:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.tarjeta-candidato.seleccionado {
+  border-color: #3f51b5;
+  background-color: #e8eaf6;
+}
+
+.boton-votar {
+  height: 48px;
+  min-width: 200px;
+}
+
+.error {
+  color: #d32f2f;
+  margin-bottom: 1rem;
+}

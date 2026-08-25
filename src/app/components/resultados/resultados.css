@@ -1,0 +1,76 @@
+.contenedor {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.selector-jornada {
+  margin-bottom: 1.5rem;
+}
+
+.cargando {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.total-votos {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.tarjeta-resultado {
+  margin-bottom: 0.75rem;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.tarjeta-resultado.ganador {
+  border: 2px solid #ffc107;
+  background-color: #fffbeb;
+}
+
+.fila-resultado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.nombre {
+  font-weight: 500;
+}
+
+.corona {
+  margin-left: 0.3rem;
+}
+
+.conteo {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.barra-fondo {
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.barra-progreso {
+  background-color: #3f51b5;
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+.sin-datos {
+  color: #888;
+  margin-top: 2rem;
+}
+
+.volver {
+  display: inline-block;
+  margin-top: 2rem;
+  color: #3f51b5;
+}
