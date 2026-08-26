@@ -39,7 +39,9 @@ export class VotarComponent implements OnInit {
   cargarCandidatos() {
     if (!this.jornada) return;
     this.votacionService.obtenerCandidatos(this.jornada).subscribe({
-      next: (data) => { this.candidatos = data; this.cargando = false; },
+      next: (data) => { this.candidatos = data; this.cargando = false; 
+        console.log('Candidatos cargados:', data);
+      },
       error: () => { this.errorMsg = 'No se pudieron cargar los candidatos.'; this.cargando = false; }
     });
   }

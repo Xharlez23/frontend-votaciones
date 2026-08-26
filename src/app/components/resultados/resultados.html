@@ -21,7 +21,7 @@
         <span class="rango">{{ i + 1 }}</span>
 
         <div class="avatar-resultado">
-          <img *ngIf="r.foto_url" [src]="r.foto_url" [alt]="r.nombre">
+          <img *ngIf="r.foto_url" [src]="'assets/img-candidatos/' + r.foto_url" [alt]="r.nombre">
           <span *ngIf="!r.foto_url">{{ obtenerIniciales(r.nombre) }}</span>
         </div>
 
