@@ -9,23 +9,33 @@
   <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
 
   <div class="rejilla-candidatos" *ngIf="!cargando">
-    <button
-      type="button"
-      class="tarjeta-candidato"
-      *ngFor="let candidato of candidatos"
-      [class.seleccionada]="candidatoSeleccionado === candidato.id"
-      (click)="seleccionar(candidato.id)">
+    <button type="button" class="tarjeta-candidato" *ngFor="let candidato of candidatos"
+      [class.seleccionada]="candidatoSeleccionado === candidato.id" (click)="seleccionar(candidato.id)">
 
       <div class="foto-candidato">
-        <img *ngIf="candidato.foto_url" [src]="candidato.foto_url" [alt]="candidato.nombre">
-        <span *ngIf="!candidato.foto_url" class="foto-inicial">{{ obtenerIniciales(candidato.nombre) }}</span>
-        <span class="sello" *ngIf="candidatoSeleccionado === candidato.id">✓</span>
+
+        <img *ngIf="candidato.foto_url" [src]="'assets/img-candidatos/' + candidato.foto_url" [alt]="candidato.nombre">
+
+        <span *ngIf="!candidato.foto_url" class="foto-inicial">
+          {{ obtenerIniciales(candidato.nombre) }}
+        </span>
+
+        <span class="sello" *ngIf="candidatoSeleccionado === candidato.id">
+          ✓
+        </span>
+
       </div>
 
       <div class="info-candidato">
-        <p class="nombre-candidato">{{ candidato.nombre }}</p>
-        <p class="ficha-candidato">Ficha {{ candidato.ficha }}</p>
+        <p class="nombre-candidato">
+          {{ candidato.nombre }}
+        </p>
+
+        <p class="ficha-candidato">
+          {{ candidato.ficha }}
+        </p>
       </div>
+
     </button>
   </div>
 
