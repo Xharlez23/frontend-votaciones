@@ -1,46 +1,44 @@
-<div class="contenedor">
-  <h1>Resultados en vivo</h1>
+<div class="pantalla-resultados">
+  <header class="encabezado-resultados">
+    <span class="eyebrow">En vivo</span>
+    <h1>Resultados de la votación</h1>
+  </header>
 
-  <mat-button-toggle-group
-    [value]="jornadaSeleccionada"
-    (change)="cambiarJornada($event.value)"
-    class="selector-jornada">
-    <mat-button-toggle value="MANANA">Mañana</mat-button-toggle>
-    <mat-button-toggle value="TARDE">Tarde</mat-button-toggle>
-    <mat-button-toggle value="NOCHE">Noche</mat-button-toggle>
-  </mat-button-toggle-group>
-
-  <div *ngIf="cargando" class="cargando">
-    <mat-spinner></mat-spinner>
+  <div class="tabs-jornada">
+    <button *ngFor="let j of jornadas" class="tab" [class.activo]="jornadaSeleccionada === j" (click)="cambiarJornada(j)">
+      {{ formatearJornada(j) }}
+    </button>
   </div>
 
+  <div class="cargando" *ngIf="cargando"><span class="spinner-grande"></span></div>
   <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
 
   <div *ngIf="!cargando && resultados">
-    <p class="total-votos">Total de votos: {{ resultados.totalVotos }}</p>
+    <p class="total-votos">{{ resultados.totalVotos }} voto{{ resultados.totalVotos === 1 ? '' : 's' }} registrado{{ resultados.totalVotos === 1 ? '' : 's' }}</p>
 
-    <mat-card
-      *ngFor="let r of resultados.resultados; let i = index"
-      class="tarjeta-resultado"
-      [class.ganador]="i === 0 && r.votos > 0">
-      <mat-card-content>
-        <div class="fila-resultado">
-          <span class="nombre">
-            {{ r.nombre }}
-            <span *ngIf="i === 0 && r.votos > 0" class="corona">🏆</span>
-          </span>
-          <span class="conteo">{{ r.votos }} votos ({{ calcularPorcentaje(r.votos) }}%)</span>
-        </div>
-        <div class="barra-fondo">
-          <div class="barra-progreso" [style.width.%]="calcularPorcentaje(r.votos)"></div>
-        </div>
-      </mat-card-content>
-    </mat-card>
+    <div class="lista-resultados">
+      <div class="fila-resultado" *ngFor="let r of resultados.resultados; let i = index" [class.ganador]="i === 0 && r.votos > 0">
+        <span class="rango">{{ i + 1 }}</span>
 
-    <p *ngIf="resultados.resultados.length === 0" class="sin-datos">
-      No hay candidatos registrados para esta jornada.
-    </p>
+        <div class="avatar-resultado">
+          <img *ngIf="r.foto_url" [src]="r.foto_url" [alt]="r.nombre">
+          <span *ngIf="!r.foto_url">{{ obtenerIniciales(r.nombre) }}</span>
+        </div>
+
+        <div class="datos-resultado">
+          <div class="fila-nombre">
+            <span class="nombre">{{ r.nombre }}</span>
+            <span class="conteo">{{ r.votos }} ({{ calcularPorcentaje(r.votos) }}%)</span>
+          </div>
+          <div class="barra-fondo"><div class="barra-progreso" [style.width.%]="calcularPorcentaje(r.votos)"></div></div>
+        </div>
+
+        <span class="corona" *ngIf="i === 0 && r.votos > 0">★</span>
+      </div>
+    </div>
+
+    <p *ngIf="resultados.resultados.length === 0" class="sin-datos">No hay candidatos registrados para esta jornada.</p>
   </div>
 
-  <a routerLink="/" class="volver">Volver al inicio</a>
+  <a routerLink="/" class="volver">← Volver al inicio</a>
 </div>

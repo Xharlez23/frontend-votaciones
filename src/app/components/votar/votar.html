@@ -1,32 +1,41 @@
-<div class="contenedor">
-  <h1>Selecciona tu candidato</h1>
-  <p class="jornada-label">Jornada: {{ jornada }}</p>
+<div class="pantalla-votar">
+  <header class="encabezado-votar">
+    <span class="eyebrow">Jornada · {{ formatearJornada(jornada) }}</span>
+    <h1>Elige a tu representante</h1>
+    <p class="subtitulo">Toca una tarjeta para seleccionar tu voto. Podrás confirmarlo antes de enviarlo.</p>
+  </header>
 
-  <div *ngIf="cargando" class="cargando">
-    <mat-spinner></mat-spinner>
-  </div>
-
+  <div class="cargando" *ngIf="cargando"><span class="spinner-grande"></span></div>
   <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
 
-  <div class="grid-candidatos" *ngIf="!cargando">
-    <mat-card
-      *ngFor="let candidato of candidatos"
+  <div class="rejilla-candidatos" *ngIf="!cargando">
+    <button
+      type="button"
       class="tarjeta-candidato"
-      [class.seleccionado]="candidatoSeleccionado === candidato.id"
+      *ngFor="let candidato of candidatos"
+      [class.seleccionada]="candidatoSeleccionado === candidato.id"
       (click)="seleccionar(candidato.id)">
-      <mat-card-content>
-        <h3>{{ candidato.nombre }}</h3>
-        <p>Ficha: {{ candidato.ficha }}</p>
-      </mat-card-content>
-    </mat-card>
+
+      <div class="foto-candidato">
+        <img *ngIf="candidato.foto_url" [src]="candidato.foto_url" [alt]="candidato.nombre">
+        <span *ngIf="!candidato.foto_url" class="foto-inicial">{{ obtenerIniciales(candidato.nombre) }}</span>
+        <span class="sello" *ngIf="candidatoSeleccionado === candidato.id">✓</span>
+      </div>
+
+      <div class="info-candidato">
+        <p class="nombre-candidato">{{ candidato.nombre }}</p>
+        <p class="ficha-candidato">Ficha {{ candidato.ficha }}</p>
+      </div>
+    </button>
   </div>
 
-  <button
-    mat-raised-button
-    color="primary"
-    class="boton-votar"
-    [disabled]="!candidatoSeleccionado || enviandoVoto"
-    (click)="confirmarVoto()">
-    {{ enviandoVoto ? 'Enviando voto...' : 'Confirmar voto' }}
-  </button>
+  <p class="sin-datos" *ngIf="!cargando && candidatos.length === 0">
+    Aún no hay candidatos registrados para esta jornada.
+  </p>
+
+  <div class="barra-confirmar" *ngIf="candidatoSeleccionado">
+    <button class="boton-primario" [disabled]="enviandoVoto" (click)="confirmarVoto()">
+      {{ enviandoVoto ? 'Enviando voto...' : 'Confirmar mi voto' }}
+    </button>
+  </div>
 </div>

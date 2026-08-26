@@ -1,76 +1,53 @@
-.contenedor {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  text-align: center;
-}
+.pantalla-resultados { max-width: 640px; margin: 0 auto; padding: 2.5rem 1.25rem 3rem; }
 
-.selector-jornada {
-  margin-bottom: 1.5rem;
-}
+.encabezado-resultados { text-align: center; margin-bottom: 1.5rem; }
+.encabezado-resultados h1 { font-size: 1.7rem; margin: 0.3rem 0 0; }
 
-.cargando {
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
+.tabs-jornada { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
+.tab {
+  font-family: var(--font-body); font-weight: 600; font-size: 0.85rem;
+  padding: 0.55rem 1.1rem; border-radius: 999px; border: 2px solid var(--linea);
+  background: var(--blanco); color: var(--ink); cursor: pointer; transition: all 0.15s ease;
 }
+.tab.activo { background: var(--verde-sena); border-color: var(--verde-sena); color: var(--blanco); }
 
-.total-votos {
-  color: #666;
-  margin-bottom: 1rem;
+.cargando { display: flex; justify-content: center; padding: 2rem; }
+.spinner-grande {
+  width: 34px; height: 34px; border: 3px solid var(--linea);
+  border-top-color: var(--verde-sena); border-radius: 50%;
+  animation: girar 0.7s linear infinite;
 }
+.error { color: var(--coral); text-align: center; }
 
-.tarjeta-resultado {
-  margin-bottom: 0.75rem;
-  text-align: left;
-  transition: all 0.3s ease;
-}
+.total-votos { text-align: center; font-family: var(--font-mono); font-size: 0.8rem; color: #777; margin-bottom: 1.25rem; }
 
-.tarjeta-resultado.ganador {
-  border: 2px solid #ffc107;
-  background-color: #fffbeb;
-}
+.lista-resultados { display: flex; flex-direction: column; gap: 0.7rem; }
 
 .fila-resultado {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.8rem;
+  background: var(--blanco); border: 1px solid var(--linea); border-radius: 14px;
+  padding: 0.7rem 0.9rem; transition: all 0.3s ease;
 }
+.fila-resultado.ganador { border-color: var(--oro); background: #fdf7e8; }
 
-.nombre {
-  font-weight: 500;
-}
+.rango { font-family: var(--font-mono); color: #999; width: 18px; text-align: center; font-size: 0.85rem; }
 
-.corona {
-  margin-left: 0.3rem;
+.avatar-resultado {
+  flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
+  background: var(--paper-alt); display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 600; color: var(--verde-sena);
 }
+.avatar-resultado img { width: 100%; height: 100%; object-fit: cover; }
 
-.conteo {
-  color: #555;
-  font-size: 0.9rem;
-}
+.datos-resultado { flex: 1; min-width: 0; }
+.fila-nombre { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; margin-bottom: 0.35rem; }
+.nombre { font-weight: 600; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.conteo { font-family: var(--font-mono); font-size: 0.78rem; color: #777; flex-shrink: 0; }
 
-.barra-fondo {
-  background-color: #e0e0e0;
-  border-radius: 8px;
-  height: 10px;
-  overflow: hidden;
-}
+.barra-fondo { background: var(--paper-alt); border-radius: 6px; height: 8px; overflow: hidden; }
+.barra-progreso { background: var(--verde-sena); height: 100%; transition: width 0.6s ease; }
+.ganador .barra-progreso { background: var(--oro); }
 
-.barra-progreso {
-  background-color: #3f51b5;
-  height: 100%;
-  transition: width 0.5s ease;
-}
-
-.sin-datos {
-  color: #888;
-  margin-top: 2rem;
-}
-
-.volver {
-  display: inline-block;
-  margin-top: 2rem;
-  color: #3f51b5;
-}
+.corona { color: var(--oro); font-size: 1.1rem; }
+.sin-datos { text-align: center; color: #888; margin-top: 2rem; }
+.volver { display: block; text-align: center; margin-top: 2rem; color: var(--verde-sena); font-weight: 600; text-decoration: none; }

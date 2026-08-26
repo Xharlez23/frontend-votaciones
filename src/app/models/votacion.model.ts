@@ -8,9 +8,21 @@ export interface Candidato {
   foto_url?: string;
 }
 
+export interface Aprendiz {
+  id: number;
+  cedula: string;
+  nombre: string;
+  ficha: string;
+  programa: string;
+  jornada: Jornada;
+}
+
 export interface VotanteRespuesta {
   votanteId: number;
   yaVoto: boolean;
+  nombre: string;
+  ficha: string;
+  programa: string;
   jornada: Jornada;
   mensaje: string;
 }
@@ -19,6 +31,7 @@ export interface ResultadoCandidato {
   id: number;
   nombre: string;
   ficha: string;
+  foto_url?: string;
   votos: number;
 }
 

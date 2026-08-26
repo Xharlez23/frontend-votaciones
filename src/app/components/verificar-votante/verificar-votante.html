@@ -1,37 +1,48 @@
-<div class="contenedor">
-  <mat-card class="tarjeta">
-    <mat-card-header>
-      <mat-card-title>Votaciones SENA</mat-card-title>
-      <mat-card-subtitle>Ingresa tus datos para votar</mat-card-subtitle>
-    </mat-card-header>
+<div class="pantalla">
+  <div class="tarjeta-ticket">
+    <div class="ticket-encabezado">
+      <span class="eyebrow">Votaciones SENA</span>
+      <h1>Elección de representantes</h1>
+      <p class="subtitulo">Ingresa tu número de cédula para continuar</p>
+    </div>
 
-    <mat-card-content>
-      <form (ngSubmit)="verificar()" class="formulario">
-        <mat-form-field appearance="outline" class="campo">
-          <mat-label>Cédula</mat-label>
-          <input matInput [(ngModel)]="cedula" name="cedula" type="text" required>
-        </mat-form-field>
+    <div class="ticket-cuerpo">
+      <label class="etiqueta" for="cedula">Cédula</label>
+      <input
+        id="cedula"
+        class="input-cedula"
+        type="text"
+        inputmode="numeric"
+        placeholder="Ej: 1001234567"
+        maxlength="15"
+        [(ngModel)]="cedula"
+        (ngModelChange)="onCedulaChange()"
+        autocomplete="off">
 
-        <mat-form-field appearance="outline" class="campo">
-          <mat-label>Nombre completo</mat-label>
-          <input matInput [(ngModel)]="nombre" name="nombre" type="text" required>
-        </mat-form-field>
+      <div class="estado-busqueda" *ngIf="buscando">
+        <span class="spinner"></span> Buscando en el padrón...
+      </div>
 
-        <mat-form-field appearance="outline" class="campo">
-          <mat-label>Jornada</mat-label>
-          <mat-select [(ngModel)]="jornada" name="jornada" required>
-            <mat-option value="MANANA">Mañana</mat-option>
-            <mat-option value="TARDE">Tarde</mat-option>
-            <mat-option value="NOCHE">Noche</mat-option>
-          </mat-select>
-        </mat-form-field>
+      <div class="credencial" *ngIf="aprendiz">
+        <div class="credencial-avatar">{{ obtenerIniciales(aprendiz.nombre) }}</div>
+        <div class="credencial-datos">
+          <p class="credencial-nombre">{{ aprendiz.nombre }}</p>
+          <p class="credencial-linea"><span>Ficha</span> {{ aprendiz.ficha }}</p>
+          <p class="credencial-linea"><span>Titulada</span> {{ aprendiz.programa }}</p>
+          <p class="credencial-linea"><span>Jornada</span> {{ formatearJornada(aprendiz.jornada) }}</p>
+        </div>
+      </div>
 
-        <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+      <p class="aviso" *ngIf="noEncontrado">
+        No encontramos esa cédula en el padrón de votantes habilitados.
+      </p>
+      <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
 
-        <button mat-raised-button color="primary" type="submit" [disabled]="cargando" class="boton">
-          {{ cargando ? 'Verificando...' : 'Continuar' }}
-        </button>
-      </form>
-    </mat-card-content>
-  </mat-card>
+      <div class="perforado"></div>
+
+      <button class="boton-primario" [disabled]="!aprendiz || cargandoVoto" (click)="continuar()">
+        {{ cargandoVoto ? 'Verificando...' : 'Continuar a la votación' }}
+      </button>
+    </div>
+  </div>
 </div>

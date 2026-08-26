@@ -1,4 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --ink: #14231c;
+  --paper: #f7f4ea;
+  --paper-alt: #efe9d8;
+  --verde-sena: #2f8f3e;
+  --verde-oscuro: #163d24;
+  --oro: #e3a72f;
+  --coral: #c1432e;
+  --linea: #d9d3bd;
+  --blanco: #ffffff;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--verde-oscuro);
+  margin: 0;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--verde-sena);
+}
+
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
